@@ -1,0 +1,20 @@
+.headerCardapio{
+    padding: 0 0;
+    background-color: white;
+}
+
+.topo{
+
+
+    
+}
+ .topo img {    
+
+    width: 100%;
+    max-height:200px;
+    object-fit: cover;
+    
+    border: 1px solid #efefef;
+
+    cursor: zoom-in;
+ }

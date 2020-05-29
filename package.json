@@ -4,8 +4,8 @@
   "main": "server.js",
   "scripts": {
     "debug": "nodemon --inspect=0.0.0.0:9229 src/server.js",
-    "start": "node src/server.js 'public,src/app/views'",    
-    "startdev": "npm-run-all -p nodemon browsersync",    
+    "startx": "node src/server.js 'public,src/app/views'",    
+    "start": "npm-run-all -p nodemon browsersync",    
     "nodemon": "nodemon src/server.js",    
     "browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public,src/app/views'",
     "deploy": "aws s3 sync build/ s3://launchstore --acl public-read"

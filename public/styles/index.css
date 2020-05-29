@@ -344,7 +344,14 @@ form .item #photos-preview img {
 .shop .cardsres p {
     color: #101010;
     font-weight: 300;
-    font-size: 24px;
+    font-size: 34px;
+    margin-top: 8px;
+}
+
+.shop .cardsres .titleprod {
+    color: rgb(78, 78, 78);
+    font-weight: 300;
+    font-size: 20px;
     margin-top: 8px;
 }
 

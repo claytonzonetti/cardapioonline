@@ -1,6 +1,7 @@
   main {
     display: grid;
     grid-template-columns: 1fr repeat(12, minmax(auto, 60px)) 1fr;
+
     grid-gap: 40px;
     padding: 60px 0;
   }
@@ -76,8 +77,10 @@
       grid-column-end: span 12;
     }
   }
-  
-  @media only screen and (max-width: 500px) {
+ 
+
+
+  @media only screen and (max-width: 500px) {    
     main {
       grid-template-columns: 10px repeat(6, 1fr) 10px;
       grid-gap: 10px;
@@ -91,3 +94,5 @@
       grid-column-end: span 6;
     }
   }
+
+ 

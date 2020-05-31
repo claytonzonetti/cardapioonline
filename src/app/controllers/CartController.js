@@ -20,9 +20,9 @@ module.exports = {
     async addOne(req,res) {
         // pegar o id do produto e o produto
         const { id } = req.params
-
+        //busca o dados do produto que vai ser inserido
         const product = await LoadProductsService.load('product', {where: { id }})
-
+       
         // pegar o carrinho da sessão
         let { cart } = req.session
 

@@ -79,6 +79,10 @@
     color:#555;
 }
 
+.cart .mi-cart {
+    font-size: 44px;    
+}
+
 .cart .add, .cart .remove, .cart .delete {
     cursor: pointer
 }

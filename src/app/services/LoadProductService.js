@@ -1,3 +1,4 @@
+const db = require('../../config/db')
 const Product = require('../models/Product')
 
 const { formatPrice, date } = require('../../lib/utils')
@@ -55,6 +56,15 @@ const LoadService = {
             console.error(error)
         }
     },
+    async productsCategory(){
+        try {                     
+            const products = await Product.searchCategory(this.filter)
+            const productsPromise = products.map(format)
+            return Promise.all(productsPromise)
+        } catch (error) {
+            console.error(error)
+        }
+    },    
     async productWithDeleted() {
         try {
             let product = await Product.findOneWithDeleted(this.filter)

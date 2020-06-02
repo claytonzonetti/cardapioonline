@@ -25,13 +25,13 @@ module.exports = {
        
         // pegar o carrinho da sessão
         let { cart } = req.session
-
+        
         // adicionar o produto ao carrinho (usando nosso gerenciador de carrinho)
         cart = Cart.init(cart).addOne(product)
-
+        
         // atualizar o carrinho da sessão
         req.session.cart = cart
-
+        
         // redirecionar o usuário para a tela do carrinho.
         return res.redirect('/cart')
 

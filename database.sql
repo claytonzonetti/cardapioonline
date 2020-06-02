@@ -20,7 +20,8 @@ CREATE TABLE "products" (
 
 CREATE TABLE "categories" (
   "id" SERIAL PRIMARY KEY,
-  "name" text NOT NULL
+  "name" text NOT NULL,
+  "initiation" int DEFAULT 0
 );
 
 INSERT INTO categories(name) VALUES ('comida');

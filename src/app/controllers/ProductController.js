@@ -134,5 +134,10 @@ module.exports = {
         })
 
         return res.redirect('/products/create')
+    },
+    async todososProdutos(req, res){
+        const allProducts = await LoadProductService.load('products')             
+           
+        return res.json(allProducts);       
     }
 }

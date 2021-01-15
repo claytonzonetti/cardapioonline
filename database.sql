@@ -42,6 +42,8 @@ CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
   "name" text NOT NULL,
   "email" text UNIQUE NOT NULL,
+  "telefone1" text NOT NULL,
+  "telefone2" text,
   "password" text NOT NULL,
   "cpf_cnpj" text UNIQUE NOT NULL,
   "cep" text,
@@ -87,7 +89,7 @@ ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFE
 -- token password recovery
 ALTER TABLE "users" ADD COLUMN reset_token text;
 ALTER TABLE "users" ADD COLUMN reset_token_expires text;
-
+ALTER TABLE "users" ADD COLUMN token text;
 -- cascade effect when delete user and products
 
 ALTER TABLE "products"
@@ -115,8 +117,19 @@ ALTER SEQUENCE users_id_seq RESTART WITH 1;
 ALTER SEQUENCE files_id_seq RESTART WITH 1;
 
 -- create orders (pedido)
+CREATE TABLE "sales" (
+  "id" SERIAL PRIMARY KEY,  
+  "total" int NOT NULL,
+  "status" text NOT NULL,
+  "created_at" timestamp DEFAULT (now()),
+  "updated_at" timestamp DEFAULT (now())
+);
+
+
+-- create orders (pedido)
 CREATE TABLE "orders" (
   "id" SERIAL PRIMARY KEY,
+  "sale_id" int NOT NULL,
   "seller_id" int NOT NULL,
   "buyer_id" int NOT NULL,
   "product_id" int NOT NULL,
@@ -128,6 +141,7 @@ CREATE TABLE "orders" (
   "updated_at" timestamp DEFAULT (now())
 );
 
+ALTER TABLE "orders" ADD FOREIGN KEY ("sale_id") REFERENCES "sales" ("id");
 ALTER TABLE "orders" ADD FOREIGN KEY ("seller_id") REFERENCES "users" ("id");
 ALTER TABLE "orders" ADD FOREIGN KEY ("buyer_id") REFERENCES "users" ("id");
 ALTER TABLE "orders" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id");

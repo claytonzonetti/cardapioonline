@@ -20,6 +20,8 @@ async function show(req, res, next) {
 
     const user = await User.findOne({ where: {id} })
 
+    console.log(user)
+
     if (!user) return res.render("user/register", {
         error: "Usuário não encontrado!"
     })
@@ -38,7 +40,7 @@ async function post(req, res, next) {
     //check if user exists [email, cpf_cnpj]
     let { email, cpf_cnpj, password, passwordRepeat} = req.body
 
-    cpf_cnpj = cpf_cnpj.replace(/\D/g, "")
+    cpf_cnpj = email //cpf_cnpj.replace(/\D/g, "")
 
     const user = await User.findOne({ 
         where: { email },
@@ -60,7 +62,12 @@ async function post(req, res, next) {
 }
 async function update(req, res, next) {
     //check if has all fields
+    console.log('req.body')
+    console.log(req.body)
+    console.log('-----------')
+
     const fillAllFields = checkAllFields(req.body)
+
     if(fillAllFields){
         return res.render("user/index", fillAllFields)
     }
@@ -74,12 +81,21 @@ async function update(req, res, next) {
 
     const user = await User.findOne({ where: {id} })
 
+    console.log('user')
+    console.log(user)
+    console.log('-----------')
+
     const passed = await compare(password, user.password)
 
     if(!passed) return res.render("user/index", {
         user: req.body,
         error: "Senha incorreta."
     })
+
+    console.log('user final')
+    console.log(user)
+    console.log('-----------')
+
 
     req.user = user
 

@@ -15,7 +15,7 @@ module.exports = {
         try {
             const { user } = req
 
-            user.cpf_cnpj = formatCpfCnpj(user.cpf_cnpj)
+            //user.cpf_cnpj = formatCpfCnpj(user.cpf_cnpj)
             user.cep = formatCep(user.cep)
 
             return res.render('user/index', { user })
@@ -26,10 +26,10 @@ module.exports = {
     },
     async post(req, res) {
         try {
-            let { name, email, password, cpf_cnpj, cep, address } = req.body
+            let { name, email, password, cpf_cnpj, cep, address,telefone1 } = req.body
 
             password = await hash(password, 8)
-            cpf_cnpj = cpf_cnpj.replace(/\D/g, "")
+            cpf_cnpj = email  //cpf_cnpj.replace(/\D/g, "")
             cep = cep.replace(/\D/g, "")
 
             const userId = await User.create({
@@ -38,7 +38,8 @@ module.exports = {
                 password,
                 cpf_cnpj,
                 cep,
-                address
+                address,
+                telefone1
             })
 
             req.session.userId = userId
@@ -51,9 +52,9 @@ module.exports = {
     async update(req, res) {
         try {
             const { user } = req
-            let { name, email, cpf_cnpj, cep, address } = req.body
+            let { name, email, cpf_cnpj, cep, address, telefone1 } = req.body
 
-            cpf_cnpj = cpf_cnpj.replace(/\D/g, "")
+            cpf_cnpj = email // cpf_cnpj.replace(/\D/g, "")
             cep = cep.replace(/\D/g, "")
 
             await User.update(user.id, {
@@ -61,7 +62,8 @@ module.exports = {
                 email,
                 cpf_cnpj,
                 cep,
-                address
+                address,
+                telefone1
             })
 
             return res.render("user/index", {

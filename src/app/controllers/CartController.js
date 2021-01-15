@@ -20,6 +20,7 @@ module.exports = {
     async addOne(req,res) {
         // pegar o id do produto e o produto
         const { id } = req.params
+        console.log(req.params)
         //busca o dados do produto que vai ser inserido
         const product = await LoadProductsService.load('product', {where: { id }})
        

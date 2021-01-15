@@ -32,9 +32,9 @@ module.exports = {
         }
 
         query += ` AND status != 0`
-        console.log(query)
+        
         const results = await db.query(query)
-        console.log(results.rows)
+        
         return results.rows
     },
     async searchCategory(category) {   

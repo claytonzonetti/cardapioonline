@@ -4,6 +4,7 @@ const ModelCategory = require('../models/Category')
 module.exports = { 
     async index(req, res) {
         try {  
+         
             let allProducts
             let searched = 'Toda a Loja'
             let categoryInitial
@@ -12,7 +13,7 @@ module.exports = {
             categoryInitial = categoryInitiation
 
             req.session.useCategory = categoryInitial                 
-
+            
             if (categoryInitial){           
                 allProducts = await LoadProductService.load('productsCategory', categoryInitial.id)                                            
                 searched = categoryInitial.name

@@ -5,41 +5,48 @@ const Order = require('../models/Order')
 const Sale = require('../models/Sale')
 
 const Cart = require('../../lib/cart')
-const mailer = require('../../lib/mailer')
-
-
-
-const email = (seller, product, buyer) => `
-<h2>Olá ${seller.name}</h2>
-<p>Você tem um novo pedido de compra do seu produto</p>
-<p>Produto: ${product.name}</p>
-<p>Preço: ${product.formattedPrice}</p>
-<p><br/><br/></p>
-<h3>Dados do comprador</h3>
-<p>${buyer.name}</p>
-<p>${buyer.email}</p>
-<p>${buyer.address}</p>
-<p>${buyer.cep}</p>
-<p><br/><br/></p>
-<p><strong>Entre em contato com o comprador para finalizar a venda!</strong></p>
-<p><br/><br/></p>
-<p>Atenciosamente, Equipe Launchstore</p>
-`
 
 module.exports = { 
     async index(req, res) {
-        const orders = await LoadOrderService.load('orders', {
-            where: { buyer_id: req.session.userId }
-        })
-
-        return res.render("orders/index", { orders })
+      //  console.log(req.query.status)        
+        
+        const sales = await Sale.listOpenSales(req.query.status)
+        return res.json(sales)
     },
-    async sales(req, res) {
-        const sales = await LoadOrderService.load('orders', {
-            where: { seller_id: req.session.userId }
-        })
+    async put(req, res) {        
+       
+        const createSalesPromise = req.body.map(async item => {
+            const { sale_id, status } = item
+          
+            await Sale.update(sale_id, {
+                status
+            })        
 
-        return res.render("orders/sales", { sales })
+        })    
+        
+        await Promise.all(createSalesPromise)
+        
+        return res.json(req.body)
+    },    
+
+
+
+
+
+
+
+
+
+
+
+
+    async sales(req, res) {    
+      //  console.log(req.session.userId)    
+        const sales = await LoadOrderService.load('orders', {
+            where: { seller_id: req.session.userId }            
+        })
+      //  console.log(sales)
+        return res.json(sales)
     },
     async show(req, res) {
         const order = await LoadOrderService.load('order', {
@@ -48,7 +55,7 @@ module.exports = {
 
         return res.render("orders/details", { order })
     },
-    async post(req, res) {
+    async post1(req, res) {
         try {  
 
             // pegar os produtos do carrinho
@@ -56,19 +63,7 @@ module.exports = {
             // dados do comprador pegando a requisição do usuario logado
             const buyer_id = req.session.userId
             
-           // console.log('********************')
-         //   console.log(cart.items)
-
-          //  const filteredItems = cart.items.filter(item => 
-        //        item.product.user_id != buyer_id
-          //  )
-
-         //   console.log('--------------------')
-          //  console.log(cart.items)
-
-
-            // criar o pedido
-            //const createOrdersPromise = filteredItems.map(async item => {
+   
                 const status = "open"  
 
                 const saleID = await Sale.create({                    
@@ -98,27 +93,7 @@ module.exports = {
 
                 if(!order)
                 throw new Error("Erro ao inserir itens no pedido");
-                
-                /*
-                // pegar os dados do produto
-                product = await LoadProductService.load('product', { where: {
-                    id: product_id
-                }})
 
-                // os dados do vendedor
-                const seller = await User.findOne({where: {id: seller_id}})
-
-                // os dados do comprador
-                const buyer = await User.findOne({where: {id: buyer_id}})
-
-                // enviar email com dados da compra para o vendedor
-                await mailer.sendMail({
-                    to: seller.email,
-                    from: 'no-reply@launchstore.com.br',
-                    subject: 'Novo pedido de compra',
-                    html: email(seller, product, buyer)
-                })
-                */
                 return order
             })
 

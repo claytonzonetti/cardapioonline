@@ -51,7 +51,7 @@
     </div>
 </div>
 {%endif%}
-
+<!--
 <div class="item">
     <div>CPF ou CNPJ</div>
     <div class="input">
@@ -63,6 +63,19 @@
             onkeydown="Mask.apply(this, 'cpfCnpj')"
             onblur="Validate.apply(this, 'isCpfCnpj')"
 
+        >
+    </div>
+</div>
+-->
+<div class="item">
+    <div>TELEFONE</div>
+    <div class="input">
+        <input
+        type="text" 
+        name="telefone1" 
+        placeholder="Digite seu telefone"
+        value="{{ user.telefone1 }}"
+        onkeydown="Mask.apply(this, 'ntel')"
         >
     </div>
 </div>

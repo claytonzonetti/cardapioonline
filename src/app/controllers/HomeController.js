@@ -3,7 +3,8 @@ const ModelCategory = require('../models/Category')
 
 module.exports = { 
     async index(req, res) {
-        try {  
+        console.log('OK')
+        /* try {  
          
             let allProducts
             let searched = 'Toda a Loja'
@@ -41,6 +42,6 @@ module.exports = {
         catch(err) {
             console.error(err)
         }
-
+*/
     }
 }

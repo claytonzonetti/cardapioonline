@@ -3,9 +3,9 @@ const ModelCategory = require('../models/Category')
 
 module.exports = { 
     async index(req, res) {
-        console.log('OK')
-        /* try {  
-         
+        
+         try {  
+  /*       
             let allProducts
             let searched = 'Toda a Loja'
             let categoryInitial
@@ -14,14 +14,14 @@ module.exports = {
             categoryInitial = categoryInitiation
 
             req.session.useCategory = categoryInitial                 
-            
+          
             if (categoryInitial){           
                 allProducts = await LoadProductService.load('productsCategory', categoryInitial.id)                                            
                 searched = categoryInitial.name
             } else {             
                 allProducts = await LoadProductService.load('products')             
             }
-                
+            
             const products = allProducts
                 
 
@@ -38,10 +38,12 @@ module.exports = {
             const categories = allcategories
 
             return res.render("search/index-cardapio", { products, search ,categories })
+*/
+            return res.send("texto")
         }
         catch(err) {
             console.error(err)
         }
-*/
+        
     }
 }

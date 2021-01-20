@@ -5,7 +5,7 @@ module.exports = {
     async index(req, res) {
         
          try {  
-  /*       
+        
             let allProducts
             let searched = 'Toda a Loja'
             let categoryInitial
@@ -38,8 +38,7 @@ module.exports = {
             const categories = allcategories
 
             return res.render("search/index-cardapio", { products, search ,categories })
-*/
-            return res.send("texto")
+                    
         }
         catch(err) {
             console.error(err)

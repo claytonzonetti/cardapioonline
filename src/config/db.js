@@ -5,8 +5,8 @@ module.exports = new Pool({
     password: "Zonetti19",
    // host: "launchstore.ckk7kdz013d5.us-east-2.rds.amazonaws.com", 
   // host: "launchstoredb.c1kn3s9icqfn.us-east-1.rds.amazonaws.com",  
-    host: "localhost",   
-   // host: "3.134.108.154",   
+   // host: "localhost",   
+    host: "3.134.108.154",   
     port: 5432,
     database: "launchstoredb"
 })

@@ -37,7 +37,7 @@ module.exports = {
             const allcategories = await ModelCategory.categories()
             const categories = allcategories
 
-            return res.render("search/index-cardapio", { products, search ,categories })
+            return res.render("search/index-cardapio", { products, search , categories })
                     
         }
         catch(err) {

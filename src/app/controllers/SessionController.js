@@ -10,8 +10,8 @@ module.exports = {
     },
     login(req, res) {
         req.session.userId = req.user.id
-        req.session.token = req.user.token   
-
+        req.session.token = req.user.token 
+        
         return res.redirect("/users")
     },
     logout(req, res) {

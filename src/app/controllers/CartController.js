@@ -12,6 +12,8 @@ module.exports = {
 
             return res.render("cart/index", { cart })
         }
+
+
         catch(err) {
             console.error(err)
         }
@@ -20,13 +22,14 @@ module.exports = {
     async addOne(req,res) {
         // pegar o id do produto e o produto
         const { id } = req.params
-        console.log(req.params)
+
         //busca o dados do produto que vai ser inserido
         const product = await LoadProductsService.load('product', {where: { id }})
-       
+      
         // pegar o carrinho da sessão
         let { cart } = req.session
         
+
         // adicionar o produto ao carrinho (usando nosso gerenciador de carrinho)
         cart = Cart.init(cart).addOne(product)
         

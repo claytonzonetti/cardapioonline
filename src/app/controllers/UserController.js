@@ -26,7 +26,7 @@ module.exports = {
     },
     async post(req, res) {
         try {
-            let { name, email, password, cpf_cnpj, cep, address,telefone1 } = req.body
+            let { name, email, password, cpf_cnpj, cep, address,telefone1 } = y
 
             password = await hash(password, 8)
             cpf_cnpj = email  //cpf_cnpj.replace(/\D/g, "")

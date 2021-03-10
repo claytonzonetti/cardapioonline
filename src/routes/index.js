@@ -5,8 +5,6 @@ const HomeController = require('../app/controllers/HomeController')
 
 const ProductController = require('../app/controllers/ProductController')
 
-
-
 const products = require('./products')
 const users = require('./users')
 const cart = require('./cart')

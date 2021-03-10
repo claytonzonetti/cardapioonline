@@ -1,5 +1,5 @@
 function onlyUsers(req, res, next) {
-    console.log('users aqui')
+
     if (!req.session.userId)
         return res.redirect('/users/login')
     
@@ -7,9 +7,7 @@ function onlyUsers(req, res, next) {
 }
 
 function onlyUsersAdm(req, res, next) {
-    console.log(' adm aqui')
-    console.log(req.session.token)
-    
+
     if (req.session.token != 'ADM')
         return res.redirect('/users/login')
     

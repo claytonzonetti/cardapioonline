@@ -20,9 +20,7 @@ async function show(req, res, next) {
 
     const user = await User.findOne({ where: {id} })
 
-    console.log(user)
-
-    if (!user) return res.render("user/register", {
+     if (!user) return res.render("user/register", {
         error: "Usuário não encontrado!"
     })
 
@@ -81,20 +79,12 @@ async function update(req, res, next) {
 
     const user = await User.findOne({ where: {id} })
 
-    console.log('user')
-    console.log(user)
-    console.log('-----------')
-
     const passed = await compare(password, user.password)
 
     if(!passed) return res.render("user/index", {
         user: req.body,
         error: "Senha incorreta."
     })
-
-    console.log('user final')
-    console.log(user)
-    console.log('-----------')
 
 
     req.user = user
